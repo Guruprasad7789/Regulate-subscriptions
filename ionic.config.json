@@ -1,0 +1,7 @@
+{
+  "name": "Subscription",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
