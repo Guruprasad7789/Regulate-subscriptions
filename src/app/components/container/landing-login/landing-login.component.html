@@ -1,0 +1,71 @@
+<mat-toolbar fxLayout="row">
+  <div class="heading-title">Subscriptions</div>
+</mat-toolbar>
+<mat-card class="container" fxLayoutAlign.sm="center none" fxLayoutAlign.md="center none" fxLayoutAlign.lg="center none" fxLayoutAlign.xl="center none">
+  <mat-tab-group>
+        <!--Login-->
+    <mat-tab label="Login">
+      <div [formGroup]="regiserLoginForm">
+      <mat-card>
+        <mat-card-content fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="space-evenly stretch" 
+        fxLayoutAlign.xs="space-evenly stretch"  fxLayoutAlign="center center" >
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your email</mat-label>
+            <input matInput type="text" formControlName="email"/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        <div fxLayout="row" >    
+              <button (click)="regiserLoginSubmit()" mat-raised-button color="accent">Login</button> 
+              <div *ngIf="loaderDisplay" >
+                <object data="assets/loader/loader.svg" type="image/svg+xml"></object>
+                </div>
+      </div>
+    </mat-card-content>
+        </mat-card>  
+        </div>
+    </mat-tab>
+    <!--Register-->
+    <mat-tab label="Register"> 
+      <div [formGroup]="regiserLoginForm">
+      <mat-card>
+        <mat-card-content fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.sm="space-evenly stretch" 
+        fxLayoutAlign.xs="space-evenly stretch"  fxLayoutAlign="center center" >
+       
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your email</mat-label>
+            <input matInput type="text" formControlName="email"/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Confirm your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirm_password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <div fxLayout="row" >    
+            <button (click)="regiserLoginSubmit()" mat-raised-button color="accent">Register</button> 
+            <div *ngIf="loaderDisplay" >
+            <object data="assets/loader/loader.svg" type="image/svg+xml"></object>
+            </div>
+    </div>
+        </mat-card-content>
+     
+        </mat-card>
+</div>
+    </mat-tab>
+      </mat-tab-group>
+    
+</mat-card>

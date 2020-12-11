@@ -1,0 +1,30 @@
+.add-subscription-container .back-button{
+    background-color: #fff;
+}
+.add-subscription-container .card{
+    padding: 20px;
+}
+.add-subscription-container .card mat-form-field input, mat-label{
+    text-align: center;
+    font-size: 50px;
+    }
+  .add-subscription-container .card mat-form-field mat-label{
+        text-align: center;
+        font-size: 50px;
+        margin-left: 40px;
+ }
+ .tab-input{
+width: 169px;
+ margin-right: 17px;
+ background-color: #dadada;
+ height: 40px;
+ text-align: center;
+ }
+ .save-subscription{
+    background-color: #868686;
+    height: 56px;
+    color: white;
+    width: 268px;
+    font-size: 23px;
+    font-weight: 400;
+    border-radius: 28px; }

@@ -9,15 +9,44 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { BodyComponent }  from "../app/components/layout/body/body.component";
+import {HomeComponent} from "../app/components/layout/home/home.component";
+import {FooterComponent} from "../app/components/layout/footer/footer.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+import { StoreModule } from '@ngrx/store';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import {  environment} from "../environments/environment";
+import { LandingLoginComponent } from './components/container/landing-login/landing-login.component';
+import { AddSubscriptionComponent } from './components/container/add-subscription/add-subscription.component';
+import { MatErrorComponent } from './components/layout/dialog/mat-error-dialog';
+
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  declarations: [AppComponent,BodyComponent,HomeComponent,FooterComponent,LandingLoginComponent,AddSubscriptionComponent,MatErrorComponent],
+  entryComponents: [MatErrorComponent],
+  imports: [BrowserModule,
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    BrowserAnimationsModule,
+    MaterialModule, 
+    StoreModule.forRoot({}, {}),
+    FlexLayoutModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+  
+  ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule {}

@@ -1,11 +1,26 @@
 import { NgModule } from '@angular/core';
+import { AngularFirestoreModule, combineChange } from '@angular/fire/firestore';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AddSubscriptionComponent } from './components/container/add-subscription/add-subscription.component';
+import { LandingLoginComponent } from './components/container/landing-login/landing-login.component';
+import { HomeComponent } from './components/layout/home/home.component';
 
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from "@angular/fire/auth-guard";
+
+const redirectUnauthorizedToLogin = ()=> redirectUnauthorizedTo(['/']);
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  {path: '',component:LandingLoginComponent },
+  {path: 'home',component:HomeComponent,
+  canActivate:[AngularFireAuthGuard]
+  ,data:{
+    authGuardPipe:redirectUnauthorizedToLogin
   }
+ },
+  {path:'add-subscription',component:AddSubscriptionComponent,
+  canActivate:[AngularFireAuthGuard]
+  ,data:{
+    authGuardPipe:redirectUnauthorizedToLogin
+  }}
 ];
 @NgModule({
   imports: [
