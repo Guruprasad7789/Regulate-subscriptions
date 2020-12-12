@@ -6,9 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-subscription.component.scss'],
 })
 export class AddSubscriptionComponent implements OnInit {
-
+color = '#000';
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    setInterval(function(){
+      this.color = '#dcdcdc';
+    }, 2000);
+  }
 
 }

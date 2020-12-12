@@ -1,8 +1,9 @@
 <mat-toolbar fxLayout="row">
   <div class="heading-title">Subscriptions</div>
 </mat-toolbar>
+<div *ngIf="displayCachedUserData" fxLayoutAlign="center center" class="card-body h6">Hey &nbsp; <b>{{getUserFromCache()}}</b> &nbsp; you logged out..</div>
 <mat-card class="container" fxLayoutAlign.sm="center none" fxLayoutAlign.md="center none" fxLayoutAlign.lg="center none" fxLayoutAlign.xl="center none">
-  <mat-tab-group>
+    <mat-tab-group>
         <!--Login-->
     <mat-tab label="Login">
       <div [formGroup]="regiserLoginForm">
