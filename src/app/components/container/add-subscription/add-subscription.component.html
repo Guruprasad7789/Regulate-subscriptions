@@ -2,9 +2,12 @@
 <form>
     <div fxLayout="column" fxLayoutAlign="space-around stretch" >
     <div class="card" style="margin: 10px;">
-        <div fxLayoutAlign="start start"><button routerLink="['home']" class="back-button"><span class="material-icons">
+        <div fxLayoutAlign="start start">
+            <button [routerLink]="['/home']" class="back-button"><span class="material-icons">
             keyboard_backspace
-            </span></button></div>
+            </span>
+            </button>
+        </div>
         <mat-form-field fxLayoutAlign="center center" floatLabel="never">
             <mat-label>0.00</mat-label>
              <input matInput type="number">
@@ -27,19 +30,27 @@
             <b>Billing period</b> 
         </div>
         <div fxLayout="row" fxLayoutAlign="space-around center" >
-          <div>Every</div><div>
+          <div>Every</div>
+         <div>
             <mat-form-field  floatLabel="never" appearance="none">
                 <input class="tab-input" matInput type="number" value="1">
            </mat-form-field>
-           <mat-form-field  floatLabel="never" appearance="none">
-            <input class="tab-input" matInput type="number" value="1">
-       </mat-form-field>
-          </div>
+         </div>
+            <div>
+            <mat-form-field appearance="none">
+                <mat-select class="tab-input" name="food" value="month">
+                    <mat-option value="day">Day</mat-option>
+                    <mat-option value="week">Week</mat-option>
+                    <mat-option value="month">Month</mat-option>
+                    <mat-option value="year">Year</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
             </div>
             <mat-card fxLayout="column" fxLayoutAlign="center stretch" >
             <div><b>First payment</b> - optional</div>
-            <mat-form-field  floatLabel="never">
-                 <input matInput type="text" placeholder="e.g. Today">
+                <mat-form-field  floatLabel="never" appearance="none">
+                <input class="tab-input" matInput type="number" value="1">
             </mat-form-field>
         </mat-card>
     </mat-tab>
@@ -52,7 +63,16 @@
     </mat-card>
  </mat-tab>
   </mat-tab-group>
-</div>
+     </div>
+    <div class="p-3">
+        <div>
+            <b>Color</b>
+        </div>
+        <button class="color-input" [style.background-color]="color">
+            Choose a nice color
+        </button>
+        <input type="text" [(ngModel)]="color" [ngModelOptions]="{standalone: true}">
+    </div>
 <mat-card  fxLayout="column" fxLayoutAlign="center stretch" >
     <div><b>Payment method</b> - optional</div>
     <mat-form-field  floatLabel="never">
@@ -80,4 +100,5 @@
 </div>
 
 </form>
+
 </ion-content>
