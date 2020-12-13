@@ -26,7 +26,7 @@ import { AddSubscriptionComponent } from './components/container/add-subscriptio
 import { MatErrorComponent } from './components/layout/dialog/mat-error-dialog';
 import {ColorPickerComponent} from './components/dialog/color-picker';
 
-
+import { rootReducer } from './ngrx/reducer';
 @NgModule({
   declarations: [AppComponent,
     BodyComponent,
@@ -42,8 +42,8 @@ import {ColorPickerComponent} from './components/dialog/color-picker';
     IonicModule.forRoot(),
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    StoreModule.forRoot({}, {}),
+      MaterialModule,
+      StoreModule.forRoot(rootReducer),
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
