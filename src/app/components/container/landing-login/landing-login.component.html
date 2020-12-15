@@ -1,12 +1,11 @@
 <mat-toolbar fxLayout="row">
   <div class="heading-title">Subscriptions</div>
 </mat-toolbar>
-<div *ngIf="displayUserEmail" fxLayoutAlign="center center" class="card-body h6">Hey &nbsp; <b>{{getUserFromCache()}}</b> &nbsp; you logged out..</div>
 <mat-card class="container" fxLayoutAlign.sm="center none" fxLayoutAlign.md="center none" fxLayoutAlign.lg="center none" fxLayoutAlign.xl="center none">
     <mat-tab-group>
         <!--Login-->
     <mat-tab label="Login">
-      <div [formGroup]="regiserLoginForm">
+      <div [formGroup]="registerLoginForm">
       <mat-card>
         <mat-card-content fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="space-evenly stretch" 
             fxLayoutAlign="center center" >
@@ -22,7 +21,7 @@
             </button>
           </mat-form-field>
         <div fxLayout="row" >    
-              <button (click)="regiserLoginSubmit()" mat-raised-button color="accent">Login</button> 
+              <button (click)="registerLoginSubmit()" mat-raised-button color="accent">Login</button>
               <div *ngIf="loaderDisplay" >
                 <object data="assets/loader/loader.svg" type="image/svg+xml"></object>
                 </div>
@@ -33,7 +32,7 @@
     </mat-tab>
     <!--Register-->
     <mat-tab label="Register"> 
-      <div [formGroup]="regiserLoginForm">
+      <div [formGroup]="registerLoginForm">
       <mat-card>
         <mat-card-content fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.sm="space-evenly stretch" 
         fxLayoutAlign.xs="space-evenly stretch"  fxLayoutAlign="center center" >
@@ -57,7 +56,7 @@
             </button>
           </mat-form-field>
           <div fxLayout="row" >    
-            <button (click)="regiserLoginSubmit()" mat-raised-button color="accent">Register</button> 
+            <button (click)="registerLoginSubmit()" mat-raised-button color="accent">Register</button>
             <div *ngIf="loaderDisplay" >
             <object data="assets/loader/loader.svg" type="image/svg+xml"></object>
             </div>

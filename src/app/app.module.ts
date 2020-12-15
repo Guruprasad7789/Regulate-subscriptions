@@ -25,7 +25,7 @@ import { LandingLoginComponent } from './components/container/landing-login/land
 import { AddSubscriptionComponent } from './components/container/add-subscription/add-subscription.component';
 import { MatErrorComponent } from './components/layout/dialog/mat-error-dialog';
 import {ColorPickerComponent} from './components/dialog/color-picker';
-
+import { ToastrModule } from 'ngx-toastr';
 import { rootReducer } from './ngrx/reducer';
 @NgModule({
   declarations: [AppComponent,
@@ -48,7 +48,13 @@ import { rootReducer } from './ngrx/reducer';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      closeButton: true,
+      progressBar:true,
+      easing: 'ease-in',
+      easeTime:300,
+    })
   ],
   providers: [
     StatusBar,
