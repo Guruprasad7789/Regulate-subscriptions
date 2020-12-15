@@ -14,55 +14,52 @@ import { userInfoAction } from '../../../ngrx/actions/user-action';
 })
 export class LandingLoginComponent implements OnInit {
 hide = true;
-    regiserLoginForm: FormGroup;
-    loaderDisplay: boolean = false;
-    displayUserEmail :boolean= false;
+    registerLoginForm: FormGroup;
+    loaderDisplay = false;
+    displayUserEmail = false;
   constructor(
     private formBuilder: FormBuilder,
     private auth: AngularFireAuth,
     private router: Router,
-      private store: Store<rootReducerState>
+    private store: Store<rootReducerState>
   ) {
-  
+
   }
 
     ngOnInit() {
-       
+
         this.createRegisterLoginForm();
-     
+
   }
-  createRegisterLoginForm(){
-this.regiserLoginForm = this.formBuilder.group({
+ private createRegisterLoginForm(): void{
+this.registerLoginForm = this.formBuilder.group({
     email: new FormControl('guruhero@gmail.com', [Validators.required, Validators.email]),
   password: new FormControl('111111', [Validators.required, Validators.minLength(6)]),
   confirm_password: new FormControl('', [Validators.required, Validators.minLength(6)]) || '',
 });
   }
-  regiserLoginSubmit(){
-    this.loaderDisplay = true;
-    let email;
-    let password;
-    const confirm_password = this.regiserLoginForm.value.confirm_password;
+ public async registerLoginSubmit(): Promise<void>{
+     this.loaderDisplay = true;
+     let email;
+     let password;
+     const confirm_password = this.registerLoginForm.value.confirm_password;
     // Login
-    if (confirm_password === ''){
-       email = this.regiserLoginForm.value.email;
-       password = this.regiserLoginForm.value.password;
-        this.auth.signInWithEmailAndPassword(email, password).then(res => {
-            const currentUser:user = {
+     if (confirm_password === ''){
+       email = this.registerLoginForm.value.email;
+       password = this.registerLoginForm.value.password;
+       await this.auth.signInWithEmailAndPassword(email, password).then(res => {
+            const currentUser: user = {
                 email: res.user.email,
                 isNewUser: res.additionalUserInfo.isNewUser,
                 creationTime: res.user.metadata.creationTime,
                 lastSignInTime: res.user.metadata.lastSignInTime
 
-            }
+            };
             console.log(res);
             this.store.dispatch(new userInfoAction({ data: currentUser }));
-            setTimeout(() => {
-                this.displayUserEmail = true;
-            }, 5000);
-        this.router.navigate(['/home']);
+            this.router.navigate(['/home']);
             this.loaderDisplay = false;
-            
+
 
       },
       err => {
@@ -73,9 +70,9 @@ this.regiserLoginForm = this.formBuilder.group({
     }
     // Register
     else{
-      email = this.regiserLoginForm.value.email;
-      password = (this.regiserLoginForm.value.password === this.regiserLoginForm.value.confirm_password) ?
-      this.regiserLoginForm.value.password : alert('Password and Confirm password must be match.');
+      email = this.registerLoginForm.value.email;
+      password = (this.registerLoginForm.value.password === this.registerLoginForm.value.confirm_password) ?
+     await this.registerLoginForm.value.password : alert('Password and Confirm password must be match.');
     // create User in firebase
       this.auth.createUserWithEmailAndPassword(email, password).then(res => {
       console.log(res);
@@ -86,13 +83,6 @@ this.regiserLoginForm = this.formBuilder.group({
       alert(err.message);
     });
     }
-    console.log(this.regiserLoginForm.value);
+     console.log(this.registerLoginForm.value);
 }
-    getUserFromCache() {
-        let userEmail:string;
-        this.store.select(getUserInfo).subscribe(data => {
-            userEmail = data.email;
-        });
-        return userEmail;
-    }
 }
