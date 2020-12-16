@@ -1,13 +1,14 @@
 import { ActionReducerMap, createSelector } from '@ngrx/store';
 import { userReducerState } from './user-reducer';
-import *as fromUser from './user-reducer';
+import * as fromUser from './user-reducer';
+// tslint:disable-next-line:class-name
 export interface rootReducerState {
     users: userReducerState;
 }
 
 export const rootReducer: ActionReducerMap<rootReducerState> = {
-    users:fromUser.userReducer
-}
+    users: fromUser.userReducer
+};
 
 export const getUserState = (state: rootReducerState) => state.users;
 

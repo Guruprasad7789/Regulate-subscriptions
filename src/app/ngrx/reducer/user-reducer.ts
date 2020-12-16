@@ -1,19 +1,20 @@
-import { user } from '../../model/user-model';
+import { User } from '../../model/user-model';
 import { Action } from '../actions';
 import { USER_INFO } from '../actions/user-action';
 
+// tslint:disable-next-line:class-name
 export interface userReducerState {
-    user: user;
+    user: User;
 }
 const initialState: userReducerState = {
     user: {
         email: '',
         isNewUser: false,
         creationTime: '',
-        lastSignInTime:''
+        lastSignInTime: ''
 
     }
-}
+};
 
 export function userReducer(state = initialState, action: Action): userReducerState {
     switch (action.type) {
