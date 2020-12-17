@@ -1,5 +1,5 @@
 <ion-content overflow-scroll="false" class="add-subscription-container" fxLayout="column" fxLayoutAlign="space-evenly stretch" >
-<form>
+<form [formGroup]="addSubscriptionForm">
     <div fxLayout="column" fxLayoutAlign="space-around stretch" >
     <div class="card" style="margin: 10px;">
         <div fxLayoutAlign="start start">
@@ -10,18 +10,18 @@
         </div>
         <mat-form-field fxLayoutAlign="center center" floatLabel="never">
             <mat-label>0.00</mat-label>
-             <input matInput type="number">
+             <input matInput type="number" formControlName="moneySpend">
         </mat-form-field>
         <h3 fxLayoutAlign="center center">INR</h3>
     </div>
     <mat-card  fxLayout="column" fxLayoutAlign="space-around stretch" >
         <div><b>Name</b></div>
     <mat-form-field  floatLabel="never">
-         <input matInput type="text" placeholder="e.g. Netflix">
+         <input matInput type="text" placeholder="e.g. Netflix" formControlName="subscriptionName">
     </mat-form-field>
     <div><b>Description</b> - optional</div>
     <mat-form-field  floatLabel="never">
-         <input matInput type="text" placeholder="e.g. Premium plan">
+         <input matInput type="text" placeholder="e.g. Premium plan" formControlName="description">
     </mat-form-field>
 </mat-card>
 <mat-tab-group mat-stretch-tabs>
@@ -30,15 +30,15 @@
             <b>Billing period</b> 
         </div>
         <div fxLayout="row" fxLayoutAlign="space-around center" >
-          <div>Every</div>
-         <div>
+          <div fxFlex="15">Every</div>
+         <div fxFlex="30">
             <mat-form-field  floatLabel="never" appearance="none">
-                <input class="tab-input" matInput type="number" value="1">
+                <input class="tab-input" matInput type="number" formControlName="noOfRecurring">
            </mat-form-field>
          </div>
-            <div>
+            <div fxFlex="45">
             <mat-form-field appearance="none">
-                <mat-select class="tab-input" name="food" value="month">
+                <mat-select class="tab-select" name="food" value="month" formControlName="subscriptionSpan">
                     <mat-option value="day">Day</mat-option>
                     <mat-option value="week">Week</mat-option>
                     <mat-option value="month">Month</mat-option>
@@ -50,7 +50,7 @@
             <mat-card fxLayout="column" fxLayoutAlign="center stretch" >
             <div><b>First payment</b> - optional</div>
                 <mat-form-field  floatLabel="never" appearance="none">
-                <input class="tab-input" matInput type="number" value="1">
+                <input class="tab-select" matInput type="number"  formControlName="firstPaymentDetails">
             </mat-form-field>
         </mat-card>
     </mat-tab>
@@ -58,7 +58,7 @@
         <mat-card  fxLayout="column" fxLayoutAlign="center stretch" >
         <div><b>First payment</b> - optional</div>
         <mat-form-field  floatLabel="never">
-             <input matInput type="text" placeholder="e.g. In a year">
+             <input matInput type="text" placeholder="e.g. In a year" formControlName="expiryDateOneTime">
         </mat-form-field>
     </mat-card>
  </mat-tab>
@@ -71,16 +71,16 @@
         <button class="color-input" [style.background-color]="color">
             Choose a nice color
         </button>
-        <input type="text" [(ngModel)]="color" [ngModelOptions]="{standalone: true}">
+        <input type="text" [(ngModel)]="color" formControlName="color">
     </div>
 <mat-card  fxLayout="column" fxLayoutAlign="center stretch" >
     <div><b>Payment method</b> - optional</div>
     <mat-form-field  floatLabel="never">
-         <input matInput type="text" placeholder="e.g. Credit card">
+         <input matInput type="text" placeholder="e.g. Credit card" formControlName="paymentInfo">
     </mat-form-field>
     <div><b>Note</b> - optional</div>
     <mat-form-field  floatLabel="never">
-         <textarea matInput type="text" placeholder="e.g. Bought during the summer sale"></textarea>
+         <textarea matInput type="text" placeholder="e.g. Bought during the summer sale" formControlName="note"></textarea>
     </mat-form-field>
 </mat-card>
 <div class="p-3">

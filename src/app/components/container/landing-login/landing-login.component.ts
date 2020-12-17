@@ -35,7 +35,6 @@ export class LandingLoginComponent implements OnInit {
     ngOnInit() {
 
         this.createRegisterLoginForm();
-
     }
     private createRegisterLoginForm(): void{
         this.registerLoginForm = this.formBuilder.group({
