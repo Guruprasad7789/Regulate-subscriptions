@@ -5,21 +5,21 @@ import { AddSubscriptionComponent } from './components/container/add-subscriptio
 import { LandingLoginComponent } from './components/container/landing-login/landing-login.component';
 import { HomeComponent } from './components/layout/home/home.component';
 
-import { AngularFireAuthGuard, redirectUnauthorizedTo } from "@angular/fire/auth-guard";
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
-const redirectUnauthorizedToLogin = ()=> redirectUnauthorizedTo(['/']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/']);
 const routes: Routes = [
-  {path: '',component:LandingLoginComponent },
-  {path: 'home',component:HomeComponent,
-  canActivate:[AngularFireAuthGuard]
-  ,data:{
-    authGuardPipe:redirectUnauthorizedToLogin
+  {path: '', component: LandingLoginComponent },
+  {path: 'home', component: HomeComponent,
+  canActivate: [AngularFireAuthGuard]
+  , data: {
+    authGuardPipe: redirectUnauthorizedToLogin
   }
  },
-  {path:'add-subscription',component:AddSubscriptionComponent,
-  canActivate:[AngularFireAuthGuard]
-  ,data:{
-    authGuardPipe:redirectUnauthorizedToLogin
+  {path: 'add-subscription', component: AddSubscriptionComponent,
+  canActivate: [AngularFireAuthGuard]
+  , data: {
+    authGuardPipe: redirectUnauthorizedToLogin
   }}
 ];
 @NgModule({

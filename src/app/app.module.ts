@@ -49,11 +49,11 @@ import { rootReducer } from './ngrx/reducer';
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     ToastrModule.forRoot({
-      timeOut: 2000,
+      timeOut: 4000,
       closeButton: true,
-      progressBar:true,
+      progressBar: true,
       easing: 'ease-in',
-      easeTime:300,
+      easeTime: 300,
     })
   ],
   providers: [
