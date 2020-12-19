@@ -29,7 +29,7 @@ width: 118px;
    text-align: center;
  }
  .save-subscription{
-    background-color: #868686;
+    background-color: #000;
     height: 56px;
     color: white;
     width: 268px;
@@ -41,3 +41,7 @@ width: 118px;
    height: 34px;
    border: none;
  }
+.save-subscription.mat-button-disabled.mat-button-disabled {
+  color:white;
+  background-color: #7d7d7d;
+}

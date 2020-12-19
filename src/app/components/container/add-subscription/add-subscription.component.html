@@ -68,10 +68,10 @@
         <div>
             <b>Color</b>
         </div>
-        <button class="color-input" [style.background-color]="color">
+        <button class="color-input" [style.background-color]="'#dcdcdc'" (click)="openColorPicker()" >
             Choose a nice color
         </button>
-        <input type="text" [(ngModel)]="color" formControlName="color">
+
     </div>
 <mat-card  fxLayout="column" fxLayoutAlign="center stretch" >
     <div><b>Payment method</b> - optional</div>
@@ -90,7 +90,7 @@
     
 <button mat-button >Add labels</button> 
 <div class="p-4">
-    <button class="save-subscription" mat-button>
+    <button class="save-subscription"  [disabled]="!isFormValid()" mat-button (click)="saveSubscription()">
     <span class="material-icons">
      save
     </span>&nbsp; Save subscription
