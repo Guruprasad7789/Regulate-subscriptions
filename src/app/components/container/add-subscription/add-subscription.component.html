@@ -68,7 +68,7 @@
         <div>
             <b>Color</b>
         </div>
-        <button class="color-input" [style.background-color]="'#dcdcdc'" (click)="openColorPicker()" >
+        <button class="color-input" [style.background]="colorInput" [ngStyle]="{'color':textColor}" (click)="openColorPicker()" >
             Choose a nice color
         </button>
 

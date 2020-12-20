@@ -5,9 +5,12 @@
     "\\src\\app",
     "\\src\\app\\components",
     "\\src\\app\\components\\container",
-    "\\src\\app\\components\\container\\landing-login",
+    "\\src\\app\\components\\container\\add-subscription",
+    "\\src\\app\\components\\dialog",
+    "\\src\\app\\components\\layout",
+    "\\src\\app\\model",
     "\\src\\app\\services"
   ],
-  "SelectedNode": "\\src\\app\\components\\container\\landing-login\\landing-login.component.ts",
+  "SelectedNode": "\\src\\app\\components\\container\\add-subscription\\add-subscription.component.ts",
   "PreviewInSolutionExplorer": false
 }

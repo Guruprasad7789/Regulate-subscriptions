@@ -30,6 +30,8 @@ import { MatErrorComponent } from './components/layout/dialog/mat-error-dialog';
 import { rootReducer } from './ngrx/reducer';
 import {SubscriptionCrudService} from './services/subscriptionCrud.service';
 import {ColorSketchModule} from "ngx-color/sketch";
+import { CustomPipeModule } from './pipes/pipe.module';
+import { AuthenticationService } from './services/authentication.service';
 @NgModule({
   declarations: [AppComponent,
     BodyComponent,
@@ -58,13 +60,16 @@ import {ColorSketchModule} from "ngx-color/sketch";
       easing: 'ease-in',
       easeTime: 300,
     }),
-    ColorCircleModule, ColorSketchModule
+    ColorCircleModule,
+     ColorSketchModule,
+     CustomPipeModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     SubscriptionCrudService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AuthenticationService
   ],
   bootstrap: [AppComponent],
 

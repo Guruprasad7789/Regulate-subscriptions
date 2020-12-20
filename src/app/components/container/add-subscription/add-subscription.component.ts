@@ -4,7 +4,12 @@ import { SubscriptionCrudService } from 'src/app/services/subscriptionCrud.servi
 import {MatDialog} from '@angular/material/dialog';
 import {ColorPickerComponent} from '../../dialog/color-picker';
 import {Color} from 'ngx-color';
-
+import { Models } from '../../../model/models';
+import { ColorInversionPipe } from 'src/app/pipes/color-inversion.pipe';
+export interface IColorDialog{
+  dialog:Models.colorPicker;
+  color:string;
+}
 @Component({
   selector: 'app-add-subscription',
   templateUrl: './add-subscription.component.html',
@@ -12,6 +17,8 @@ import {Color} from 'ngx-color';
 })
 export class AddSubscriptionComponent implements OnInit {
 public addSubscriptionForm: FormGroup;
+public colorInput:string="#fff";
+public textColor:string="#000"
   constructor(
       private formBuilder: FormBuilder,
       private readonly subscriptionCrudService: SubscriptionCrudService,
@@ -49,9 +56,21 @@ public addSubscriptionForm: FormGroup;
   public isFormValid(){
     return this.addSubscriptionForm.valid;
   }
-public openColorPicker(): void{
-      this.dialog.open(ColorPickerComponent).afterClosed().subscribe((color: Color) => {
-          console.log(color);
+    public openColorPicker(): void{
+        const data :IColorDialog= {
+          dialog:Models.colorPicker.circleColorPicker,
+          color:this.colorInput
+        };
+        this.dialog.open(ColorPickerComponent, { data }).afterClosed().subscribe((color: Color) => {
+          if(color){
+      this.colorInput=color.hex;
+      console.log(color.hsl.l)
+     this.findTextInputColor(color.hsl.l);
+          }
       });
+}
+//To change Color input field text color based on background color
+public findTextInputColor(lightness:number):void{
+this.textColor = new ColorInversionPipe().transform(lightness);
 }
 }

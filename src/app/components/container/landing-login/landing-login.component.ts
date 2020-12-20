@@ -1,7 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {  rootReducerState } from '../../../ngrx/reducer';
@@ -10,6 +9,8 @@ import { userInfoAction } from '../../../ngrx/actions/user-action';
 import {MatDialog} from '@angular/material/dialog';
 import {MatErrorComponent} from '../../layout/dialog/mat-error-dialog';
 import {ToastrService} from 'ngx-toastr';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Models } from 'src/app/model/models';
 
 @Component({
     selector: 'app-landing-login',
@@ -23,7 +24,7 @@ export class LandingLoginComponent implements OnInit {
     private user: User;
     constructor(
         private formBuilder: FormBuilder,
-        private auth: AngularFireAuth,
+        private authService: AuthenticationService,
         private router: Router,
         private store: Store<rootReducerState>,
         private dialog: MatDialog,
@@ -50,18 +51,13 @@ export class LandingLoginComponent implements OnInit {
         const confirm_password = this.registerLoginForm.value.confirm_password;
         // Login
         if (buttonClicked === true){
-            email = this.registerLoginForm.value.email;
-            password = this.registerLoginForm.value.password;
-            await this.auth.signInWithEmailAndPassword(email, password).then(res => {
-                    const currentUser: User = {
-                        email: res.user.email,
-                        isNewUser: res.additionalUserInfo.isNewUser,
-                        creationTime: res.user.metadata.creationTime,
-                        lastSignInTime: res.user.metadata.lastSignInTime
-
-                    };
-                    console.log(res);
-                    this.store.dispatch(new userInfoAction({ data: currentUser }));
+            const loginInfo:Models.AuthCredential={            
+            email : this.registerLoginForm.value.email,
+            password : this.registerLoginForm.value.password};
+            await this.authService.firebaseLogin(loginInfo).then((user:User) => {
+                   
+                    console.log(user);
+                    this.store.dispatch(new userInfoAction({ data: user }));
                     this.router.navigate(['/home']);
                     this.loaderDisplay = false;
 
@@ -75,11 +71,12 @@ export class LandingLoginComponent implements OnInit {
         }
         // Register
         else{
-            email = this.registerLoginForm.value.email;
-            password = (this.registerLoginForm.value.password === this.registerLoginForm.value.confirm_password) ?
-                this.registerLoginForm.value.password : this.displayError('Password and Confirm password must be match.');
-            // create User in firebase
-            await  this.auth.createUserWithEmailAndPassword(email, password).then(res => {
+            if(this.registerLoginForm.value.password === this.registerLoginForm.value.confirm_password){
+            const registerInfo:Models.AuthCredential={
+            email : this.registerLoginForm.value.email,
+            password : this.registerLoginForm.value.password
+            };
+            await  this.authService.firebaseRegister(registerInfo).then(res => {
                 console.log(res);
                 window.location.reload();
                 this.loaderDisplay = false;
@@ -87,6 +84,12 @@ export class LandingLoginComponent implements OnInit {
                 this.loaderDisplay = false;
                 this.displayError(err.message);
             });
+        }
+        else{ 
+            this.displayError('Password and Confirm password must be match.');
+    }
+            // create User in firebase
+           
         }
     }
     private displayError(errorMessage: string): void{
@@ -118,12 +121,15 @@ export class LandingLoginComponent implements OnInit {
         });
     }
     public forgotPassword(email: string): void{
-         this.auth.sendPasswordResetEmail(email ).then(res => {
-             this.toastr.success('Password reset link has been sent', 'Subscriptions');        }, err => {
+         this.authService.firebaseForgotPassword(email ).then(res => {
+             this.toastr.success('Password reset link has been sent', 'Subscriptions');   
+                 }, err => {
            this.displayError(err.message);
         });
     }
    public keyDownFunction(event):void{
-       console.log(event)
-    }
+    if(event.keyCode===13){
+        this.registerLoginSubmit(true);
+        }
+}
 }
