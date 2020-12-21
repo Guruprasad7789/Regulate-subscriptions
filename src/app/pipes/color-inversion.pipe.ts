@@ -5,12 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ColorInversionPipe implements PipeTransform {
 
-  transform(value:number, ...args: any[]): string {
-    if(value*100 < 46){
-      return "#fff";
+  transform(value: number, ...args: any[]): string {
+    if (value * 100 < 51){
+      return '#fff';
     }
     else{
-    return "#000";
+    return '#000';
 
     }
   }

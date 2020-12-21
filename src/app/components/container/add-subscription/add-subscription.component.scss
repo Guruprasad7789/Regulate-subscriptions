@@ -45,3 +45,16 @@ width: 118px;
   color:white;
   background-color: #7d7d7d;
 }
+.add-label{
+    width:100%;
+    span{
+      font-size: 31px;
+      margin-left: 23px;
+    }
+    button{
+      background-color: #c5c5c5;
+      text-align: initial;
+      border-radius: 19px;
+      height: 31px;
+    }
+}
