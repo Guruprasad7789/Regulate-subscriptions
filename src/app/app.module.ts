@@ -32,6 +32,7 @@ import {SubscriptionCrudService} from './services/subscriptionCrud.service';
 import {ColorSketchModule} from "ngx-color/sketch";
 import { CustomPipeModule } from './pipes/pipe.module';
 import { AuthenticationService } from './services/authentication.service';
+import {AddLabelComponent} from "./components/dialog/add-label";
 @NgModule({
   declarations: [AppComponent,
     BodyComponent,
@@ -40,7 +41,8 @@ import { AuthenticationService } from './services/authentication.service';
     LandingLoginComponent,
     AddSubscriptionComponent,
     MatErrorComponent,
-    ColorPickerComponent
+    ColorPickerComponent,
+    AddLabelComponent
   ],
   entryComponents: [MatErrorComponent],
   imports: [BrowserModule,

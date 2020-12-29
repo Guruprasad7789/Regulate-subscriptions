@@ -86,9 +86,13 @@
 <div class="p-3">
     <b>Note</b> - optional
   </div>
-<div fxLayout="column" fxLayoutAlign="center center">
-    
-<button mat-button >Add labels</button> 
+<div  fxLayout="column" fxLayoutAlign="center center">
+    <div class="add-label" fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex="10" class="material-icons">
+        label_outlined
+        </span>
+        <button fxFlex="80" mat-button (click)="openAddLabel()" >Add labels</button>
+    </div>
 <div class="p-4">
     <button class="save-subscription"  [disabled]="!isFormValid()" mat-button (click)="saveSubscription()">
     <span class="material-icons">

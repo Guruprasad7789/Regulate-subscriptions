@@ -6,9 +6,10 @@ import {ColorPickerComponent} from '../../dialog/color-picker';
 import {Color} from 'ngx-color';
 import { Models } from '../../../model/models';
 import { ColorInversionPipe } from 'src/app/pipes/color-inversion.pipe';
+import {AddLabelComponent} from '../../dialog/add-label';
 export interface IColorDialog{
-  dialog:Models.colorPicker;
-  color:string;
+  dialog: Models.colorPicker;
+  color: string;
 }
 @Component({
   selector: 'app-add-subscription',
@@ -17,8 +18,8 @@ export interface IColorDialog{
 })
 export class AddSubscriptionComponent implements OnInit {
 public addSubscriptionForm: FormGroup;
-public colorInput:string="#fff";
-public textColor:string="#000"
+public colorInput = '#c5c5c5';
+public textColor = '#000';
   constructor(
       private formBuilder: FormBuilder,
       private readonly subscriptionCrudService: SubscriptionCrudService,
@@ -35,8 +36,8 @@ public textColor:string="#000"
       moneySpend: ['', Validators.required],
       subscriptionName: ['', Validators.required],
       description: [''],
-      noOfRecurring: [''],
-      subscriptionSpan: [''],
+      noOfRecurring: ['1'],
+      subscriptionSpan: ['week'],
       firstPaymentDetails: [''],
       expiryDateOneTime: [''],
       color: [''],
@@ -57,20 +58,30 @@ public textColor:string="#000"
     return this.addSubscriptionForm.valid;
   }
     public openColorPicker(): void{
-        const data :IColorDialog= {
-          dialog:Models.colorPicker.circleColorPicker,
-          color:this.colorInput
+        const data: IColorDialog = {
+          dialog: Models.colorPicker.circleColorPicker,
+          color: this.colorInput
         };
-        this.dialog.open(ColorPickerComponent, { data }).afterClosed().subscribe((color: Color) => {
-          if(color){
-      this.colorInput=color.hex;
-      console.log(color.hsl.l)
-     this.findTextInputColor(color.hsl.l);
+        this.dialog.open(ColorPickerComponent, { data }).afterClosed().subscribe((color: Color | string) => {
+      if ( typeof color === 'object'){
+      this.colorInput = color.hex;
+      this.findTextInputColor(color.hsl.l);
           }
+      else {
+          this.colorInput = color;
+      }
       });
 }
-//To change Color input field text color based on background color
-public findTextInputColor(lightness:number):void{
+// To change Color input field text color based on background color
+public findTextInputColor(lightness: number): void{
 this.textColor = new ColorInversionPipe().transform(lightness);
 }
+
+// To open label dialog
+    public openAddLabel(): void{
+     this.dialog.open(AddLabelComponent, {   maxWidth: '100vw',
+         maxHeight: '100vh',
+         height: '100%',
+         width: '100%'});
+    }
 }
