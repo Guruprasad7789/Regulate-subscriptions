@@ -12,6 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 const data = [
     MatButtonModule,
     MatIconModule,
@@ -28,7 +29,8 @@ const data = [
     MatToolbarModule,
     MatDialogModule,
     MatSelectModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCheckboxModule
 ];
 
 @NgModule({

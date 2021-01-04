@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {SubscriptionCrudService} from '../../services/subscriptionCrud.service';
 import {Models} from '../../model/models';
 import labelModel = Models.labelModel;
-import {combineAll, map} from 'rxjs/operators';
+import {MatCheckboxChange} from '@angular/material/checkbox';
 
 @Component({
     template: `<div class="top-toolbar" fxLayout="row" fxLayoutAlign="start center">
@@ -15,9 +15,12 @@ import {combineAll, map} from 'rxjs/operators';
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
         <mat-chip-list *ngFor="let label of getLabelFromDB">
-            <mat-chip class="mt-3 padding-top"><button (click)="selectedLabelForCurrentSubscription(label.label)">check</button><h4>{{label.label}}</h4></mat-chip>
+            <mat-chip class="mt-3 padding-top">
+                <mat-checkbox class="padding-checkbox" (change)="selectedLabelForCurrentSubscription($event,label.label)">
+                    <p class="pt-3">{{label.label}}</p>
+                </mat-checkbox>
+            </mat-chip>
         </mat-chip-list>
-
     </div>
         <footer class="footer bg-light text-center text-lg-start">
             <div fxLayoutAlign="space-evenly center" class="text-center p-3" >
@@ -76,12 +79,16 @@ import {combineAll, map} from 'rxjs/operators';
             .padding-top{
                 padding-top: 22px;
             }
+    .padding-checkbox{
+        padding: 0px 6px 7px 0px;
+    }
     `]
 })
 export class AddLabelComponent{
     public addSingleLabel = '';
     public getLabelFromDB: labelModel[];
-    public selectedLabel: string[]=[];
+    public selectedLabel: string[] = [];
+    public disableCheckbox = false;
         constructor(private labelService: SubscriptionCrudService) {
             this.labelService.getLabelFromDB().subscribe(res => {
                 console.log(res);
@@ -105,8 +112,25 @@ export class AddLabelComponent{
         }
             this.addSingleLabel = '';
     }
-  public  selectedLabelForCurrentSubscription(label: string): void{
-        this.selectedLabel.push(label);
-        console.log(this.selectedLabel);
+  public selectedLabelForCurrentSubscription(event: MatCheckboxChange, label: string): void{
+      //      if (event.checked === true) {
+      //  this.selectedLabel.push(label);
+      //      }
+      //      else{
+      //          const index =  this.selectedLabel.indexOf(label);
+      //          if (index !== -1) {
+      //              this.selectedLabel.splice(index, 1);
+      //          }
+      //      }
+      //      console.log(this.selectedLabel);
+      const childDiv = document.getElementsByClassName('mat-checkbox-inner-container');
+     // childDiv[0].style.display = "none";
+     // console.log(childDiv[0]);
+     // var divsToHide: HTMLCollectionOf<Element>;
+     // divsToHide = document.getElementsByClassName('mat-checkbox-inner-container'); //divsToHide is an array
+     // for(var i = 0; i < divsToHide.length; i++){
+     //     divsToHide[i].style.visibility = "hidden"; // or
+     //     divsToHide[i].style.display = "none"; // depending on what you're doing
+     // }
   }
 }

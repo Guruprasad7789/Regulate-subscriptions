@@ -15,7 +15,7 @@ import {HslToHexPipe} from '../../pipes/hslToHex.pipe';
         </div>
         <hr>
 
-        <div fxLayout="row" fxLayoutAlign="space-around center" class="mt-2" >
+        <div *ngIf="enableDownCircleButtons" fxLayout="row" fxLayoutAlign="space-around center" class="mt-2" >
         <div *ngFor="let item of [].constructor(5);let i=index">
         <button [style.background]="hexColorOfFiveButton[i]" (click)="appendToHexColor(hexColorOfFiveButton[i])" class="color-variant-button"></button>
         </div>
@@ -69,6 +69,7 @@ export class ColorPickerComponent{
    private previousColor: string = this.hexColor;
    private nextColor = '#fff';
    private color: Color;
+   public enableDownCircleButtons: boolean = false;
    public colorArray: number[] = new Array(5);
    private hexColorOfFiveButton: string[] = new  Array(5);
     public saturation: number;
@@ -79,6 +80,7 @@ export class ColorPickerComponent{
     ) {
     }
     handleChange($event: ColorEvent) {
+        this.enableDownCircleButtons=true;
         this.hexColor = $event.color.hex;
         this.nextColor = $event.color.hex;
         this.color = $event.color;

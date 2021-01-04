@@ -1,7 +1,7 @@
 {
   "name": "Subscription",
+  "type": "angular",
   "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
+    "cordova": {}
+  }
 }
