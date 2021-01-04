@@ -29,10 +29,10 @@ import { AddSubscriptionComponent } from './components/container/add-subscriptio
 import { MatErrorComponent } from './components/layout/dialog/mat-error-dialog';
 import { rootReducer } from './ngrx/reducer';
 import {SubscriptionCrudService} from './services/subscriptionCrud.service';
-import {ColorSketchModule} from "ngx-color/sketch";
+import {ColorSketchModule} from 'ngx-color/sketch';
 import { CustomPipeModule } from './pipes/pipe.module';
 import { AuthenticationService } from './services/authentication.service';
-import {AddLabelComponent} from "./components/dialog/add-label";
+import {AddLabelComponent} from './components/dialog/add-label';
 @NgModule({
   declarations: [AppComponent,
     BodyComponent,
@@ -71,7 +71,7 @@ import {AddLabelComponent} from "./components/dialog/add-label";
     SplashScreen,
     SubscriptionCrudService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthenticationService
+    AuthenticationService,
   ],
   bootstrap: [AppComponent],
 
